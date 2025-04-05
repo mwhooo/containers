@@ -1,0 +1,5 @@
+FROM devacrmrbit2411.azurecr.io/baseimage:latest
+COPY "custom.sh" "scripts/custom.sh"
+COPY "custom.py" "scripts/custom.py"
+COPY "custom.ps1" "scripts/custom.ps1"
+CMD ["python3", "scripts/custom.py"]

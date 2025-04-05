@@ -1,0 +1,1 @@
+echo "bash: I come from custom"
