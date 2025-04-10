@@ -36,6 +36,8 @@ docker push $image_latest
 
 if($create_container_group){
   Write-Output "Creating container group..."
+  #we need to check if the container already exists not
+  $exists = (az container show --name $container_name --resource-group dev) | ConvertFrom-Json
   az container create `
     --resource-group $rg `
     --name $container_name `
@@ -50,7 +52,12 @@ if($create_container_group){
   # improve by checking current status, on initial creation it will be "Pending" and you cant start it.
   # if the image version does not change the container wont get started, at least that is the theory for now.
   Write-output "Container group created. Starting the container..."
-  az container start --resource-group $rg --name $container_name
+
+  # this wont suffice yet, lets check some states
+  if($exists) {
+    Write-Output "Container group already exists. Starting the container..."
+    az container start --resource-group $rg --name $container_name
+  } 
 
 }
 Set-Location $CWD

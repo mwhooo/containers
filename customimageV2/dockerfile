@@ -1,0 +1,5 @@
+FROM devacrmrbit2411.azurecr.io/baseimagev2:latest
+
+COPY "loggingexample.ps1" "scripts/loggingexample.ps1"
+
+CMD ["pwsh", "scripts/loggingexample.ps1"]
